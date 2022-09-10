@@ -12,8 +12,8 @@ export const CanvasZoom = ({ regionBox }: Props) => {
   const regionWidth = regionBox[2];
   const regionHeight = regionBox[3];
 
-  const dx = regionWidth <= 250 && regionHeight <= 250 ? 500 : 0;
-  const dy = regionWidth <= 250 && regionHeight <= 250 ? 300 : 0;
+  const dx = regionWidth <= 250 && regionHeight <= 250 ? 500 : 150;
+  const dy = regionWidth <= 250 && regionHeight <= 250 ? 300 : 100;
 
   useEffect(() => {
     const context = canvasRef?.current?.getContext("2d");

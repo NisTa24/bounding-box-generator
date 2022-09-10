@@ -5,15 +5,12 @@ interface Props {
   regionBox: number[];
 }
 
-export const CanvasZoom = ({ regionBox }: Props) => {
+export const CanvasBlur = ({ regionBox }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const x = regionBox[0];
   const y = regionBox[1];
   const regionWidth = regionBox[2];
   const regionHeight = regionBox[3];
-
-  const dx = regionWidth <= 250 && regionHeight <= 250 ? 500 : 0;
-  const dy = regionWidth <= 250 && regionHeight <= 250 ? 300 : 0;
 
   useEffect(() => {
     const context = canvasRef?.current?.getContext("2d");
@@ -21,23 +18,26 @@ export const CanvasZoom = ({ regionBox }: Props) => {
     const render = () => {
       const image = new Image();
       image.src = INPUT_IMAGE_URL;
+
       image.onload = () => {
-        context?.clearRect(0, 0, 1900 / 2, 1080 / 2);
+        context?.clearRect(0, 0, 1980 / 2, 1080 / 2);
+        context!.filter = "none";
+        context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
+
+        context!.globalCompositeOperation = "destination-atop";
         context?.drawImage(
           image,
-          x,
-          y,
-          regionWidth,
-          regionHeight,
-          dx,
-          dy,
+          x / 2,
+          y / 2,
           regionWidth / 2,
           regionHeight / 2
         );
+        context!.filter = "blur(4px)";
+        context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
       };
     };
     render();
-  }, [x, y, regionHeight, regionWidth, dx, dy]);
+  }, [canvasRef, x, y, regionHeight, regionWidth]);
 
   return <canvas ref={canvasRef} width={1900 / 2} height={1080 / 2} />;
 };

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { CircularProgress, Box, Button } from "@mui/material";
-import { FadeIn, CanvasZoom, Spacer } from "../components";
+import { FadeIn, CanvasBlur, Spacer } from "../components";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import { inputData } from "src/utils";
 
-export const Zoom = () => {
+export const BlurFocus = () => {
   const [renderImg, setRenderImg] = useState(false);
 
   const [nextButton, setNextButton] = useState(false);
@@ -52,16 +52,14 @@ export const Zoom = () => {
     <FadeIn duration={500}>
       <Box
         display="flex"
-        marginTop="50px"
+        marginTop="30px"
         marginLeft="300px"
         marginRight="300px"
         flexDirection="column"
         alignItems="center"
-        width="600px"
-        height="400px"
       >
-        <CanvasZoom width={600} height={400} regionBox={region.bbox} />
-        <Spacer height={2} />
+        <CanvasBlur regionBox={region.bbox} />
+        <Spacer height={1} />
         <Box display="flex" flexDirection="column">
           <Box display="flex" flexDirection="row">
             <Button
@@ -70,7 +68,6 @@ export const Zoom = () => {
               style={{ textTransform: "none" }}
               onClick={handlePrevious}
               disabled={previousButton}
-              fullWidth
             >
               {"Previous"}
             </Button>
@@ -81,24 +78,22 @@ export const Zoom = () => {
               style={{ textTransform: "none" }}
               onClick={handleNext}
               disabled={nextButton}
-              fullWidth
             >
               {"Next"}
             </Button>
           </Box>
-          <Spacer height={1} />
-          <Button
-            variant="contained"
-            color="inherit"
-            style={{ textTransform: "none" }}
-            fullWidth
-            onClick={() => {
-              navigate(routes.homePage);
-            }}
-          >
-            {"Go back"}
-          </Button>
         </Box>
+        <Spacer height={1} />
+        <Button
+          variant="contained"
+          color="inherit"
+          style={{ textTransform: "none" }}
+          onClick={() => {
+            navigate(routes.homePage);
+          }}
+        >
+          {"Go back"}
+        </Button>
       </Box>
     </FadeIn>
   ) : (

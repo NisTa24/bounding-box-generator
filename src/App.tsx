@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, Zoom } from "./components";
+import { HomePage, ZoomFocus, BlurFocus } from "./components";
 import { routes } from "./constants";
 
 const InitApp = () => {
@@ -8,7 +8,8 @@ const InitApp = () => {
     <BrowserRouter>
       <Routes>
         <Route path={routes.homePage} element={<HomePage />} />
-        <Route path={routes.zoomPage} element={<Zoom />} />
+        <Route path={routes.zoomPage} element={<ZoomFocus />} />
+        <Route path={routes.blurPage} element={<BlurFocus />} />
       </Routes>
     </BrowserRouter>
   );

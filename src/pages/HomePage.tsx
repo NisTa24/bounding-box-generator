@@ -23,10 +23,8 @@ export const HomePage = () => {
         marginRight="300px"
         flexDirection="column"
         alignItems="center"
-        width="600px"
-        height="400px"
       >
-        <CanvasHome width="600px" height="400px" />
+        <CanvasHome width="700" height="400px" />
         <Spacer height={2} />
         <Button
           variant="contained"

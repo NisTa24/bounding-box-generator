@@ -16,7 +16,7 @@ export const CanvasHome = ({ width, height }: Props) => {
       const image = new Image();
       image.src = INPUT_IMAGE_URL;
       image.onload = () => {
-        context?.drawImage(image, 0, 0, 600, 400);
+        context?.drawImage(image, 0, 0, 700, 400);
       };
     };
     render();

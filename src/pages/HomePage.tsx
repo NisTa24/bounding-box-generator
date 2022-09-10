@@ -27,7 +27,7 @@ export const HomePage = () => {
         <CanvasHome width="700" height="400px" />
         <Spacer height={2} />
         <Typography variant="h2" fontWeight={600} fontSize={14}>
-          {"Choose a focus method: "}
+          {"Start by choosing a focus method: "}
         </Typography>
         <Spacer height={1} />
         <Box display="flex" flexDirection="row" gap={1}>

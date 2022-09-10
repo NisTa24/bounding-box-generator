@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CircularProgress, Box, Button } from "@mui/material";
+import { CircularProgress, Box, Button, Typography } from "@mui/material";
 import { FadeIn, CanvasHome, Spacer } from "../components";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
@@ -26,14 +26,36 @@ export const HomePage = () => {
       >
         <CanvasHome width="700" height="400px" />
         <Spacer height={2} />
-        <Button
-          variant="contained"
-          color="inherit"
-          style={{ textTransform: "none" }}
-          onClick={() => navigate(routes.zoomPage)}
-        >
-          {"Start"}
-        </Button>
+        <Typography variant="h2" fontWeight={600} fontSize={14}>
+          {"Choose a focus method: "}
+        </Typography>
+        <Spacer height={1} />
+        <Box display="flex" flexDirection="row" gap={1}>
+          <Button
+            variant="contained"
+            color="inherit"
+            style={{ textTransform: "none" }}
+            onClick={() => navigate(routes.zoomPage)}
+          >
+            {"Zoom"}
+          </Button>
+          <Button
+            variant="contained"
+            color="inherit"
+            style={{ textTransform: "none" }}
+            onClick={() => navigate(routes.blurPage)}
+          >
+            {"Blur"}
+          </Button>
+          <Button
+            variant="contained"
+            color="inherit"
+            style={{ textTransform: "none" }}
+            onClick={() => navigate(routes.saturatePage)}
+          >
+            {"Saturate"}
+          </Button>
+        </Box>
       </Box>
     </FadeIn>
   ) : (

@@ -12,8 +12,11 @@ export const CanvasZoom = ({ regionBox }: Props) => {
   const regionWidth = regionBox[2];
   const regionHeight = regionBox[3];
 
-  const dx = regionWidth <= 250 && regionHeight <= 250 ? 500 : 150;
-  const dy = regionWidth <= 250 && regionHeight <= 250 ? 300 : 100;
+  const dx = regionWidth <= 250 && regionHeight <= 250 ? 500 : 0;
+  const dy = regionWidth <= 250 && regionHeight <= 250 ? 300 : 0;
+
+  const dWidth = regionWidth > 1000 ? regionWidth / 2 : regionWidth;
+  const dHeight = regionHeight > 500 ? regionHeight / 2 : regionHeight;
 
   useEffect(() => {
     const context = canvasRef?.current?.getContext("2d");
@@ -31,13 +34,14 @@ export const CanvasZoom = ({ regionBox }: Props) => {
           regionHeight,
           dx,
           dy,
-          regionWidth / 2,
-          regionHeight / 2
+          dWidth,
+          dHeight
         );
       };
     };
     render();
-  }, [x, y, regionHeight, regionWidth, dx, dy]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [x, y, regionHeight, regionWidth]);
 
   return <canvas ref={canvasRef} width={1900 / 2} height={1080 / 2} />;
 };

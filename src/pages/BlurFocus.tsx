@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CircularProgress, Box, Button } from "@mui/material";
-import { FadeIn, CanvasBlur, Spacer } from "../components";
+import { FadeIn, Canvas, Spacer } from "../components";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import { inputData } from "src/utils";
@@ -58,7 +58,7 @@ export const BlurFocus = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <CanvasBlur regionBox={region.bbox} />
+        <Canvas regionBox={region.bbox} method="blur" />
         <Spacer height={1} />
         <Box display="flex" flexDirection="column">
           <Box display="flex" flexDirection="row">

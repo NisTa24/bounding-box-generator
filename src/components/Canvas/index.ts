@@ -1,4 +1,3 @@
-export * from './CanvasBlur';
+export * from './Canvas';
 export * from './CanvasHome';
-export * from './CanvasSaturate';
 export * from './CanvasZoom';

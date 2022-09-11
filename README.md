@@ -1,6 +1,6 @@
 # Bounding Box Focus
 
-This repository contains the code for focusing on different objects in a given image with the coordinates of the bounding box **(x, y, width, height)** for the object provided and also the input data consisting of a 2D image.
+This repository contains the code for focusing on different objects in a given image with the coordinates of the bounding box **(x, y, width, height)** for the object provided.
 
 # Libraries/Tools used
 

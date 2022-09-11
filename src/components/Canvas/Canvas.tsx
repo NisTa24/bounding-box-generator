@@ -23,32 +23,22 @@ export const Canvas = ({ regionBox, method }: Props) => {
       image.onload = () => {
         context?.clearRect(0, 0, 1980 / 2, 1080 / 2);
 
-        if (method === "blur") {
-          context!.filter = "none";
-          context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
+        context!.filter = "none";
+        context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
 
-          context!.globalCompositeOperation = "destination-atop";
-          context?.drawImage(
-            image,
-            x / 2,
-            y / 2,
-            regionWidth / 2,
-            regionHeight / 2
-          );
+        context!.globalCompositeOperation = "destination-atop";
+        context?.drawImage(
+          image,
+          x / 2,
+          y / 2,
+          regionWidth / 2,
+          regionHeight / 2
+        );
+
+        if (method === "blur") {
           context!.filter = "blur(4px)";
           context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
         } else {
-          context!.filter = "none";
-          context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
-
-          context!.globalCompositeOperation = "destination-atop";
-          context?.drawImage(
-            image,
-            x / 2,
-            y / 2,
-            regionWidth / 2,
-            regionHeight / 2
-          );
           context!.filter = "saturate(20%)";
           context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
         }

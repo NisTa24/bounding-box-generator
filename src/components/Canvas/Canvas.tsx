@@ -42,7 +42,7 @@ export const Canvas = ({ regionBox, method }: Props) => {
 
           if (sWidth <= 125 && sHeight <= 125) {
             context?.translate(x, y);
-            context?.scale(1.12, 1.12);
+            context?.scale(1.2, 1.2);
             context?.translate(-x, -y);
             context?.drawImage(image, x, y, sWidth + 3, sHeight + 2);
             context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);

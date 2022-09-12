@@ -1,6 +1,5 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, ZoomFocus, BlurFocus, SaturateFocus } from "./components";
+import { HomePage, BBoxFocus, BlurFocus, SaturateFocus } from "./components";
 import { routes } from "./constants";
 
 const InitApp = () => {
@@ -8,7 +7,7 @@ const InitApp = () => {
     <BrowserRouter>
       <Routes>
         <Route path={routes.homePage} element={<HomePage />} />
-        <Route path={routes.zoomPage} element={<ZoomFocus />} />
+        <Route path={routes.bboxPage} element={<BBoxFocus />} />
         <Route path={routes.blurPage} element={<BlurFocus />} />
         <Route path={routes.saturatePage} element={<SaturateFocus />} />
       </Routes>

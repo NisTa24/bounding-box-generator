@@ -35,9 +35,9 @@ export const HomePage = () => {
             variant="contained"
             color="inherit"
             style={{ textTransform: "none" }}
-            onClick={() => navigate(routes.zoomPage)}
+            onClick={() => navigate(routes.bboxPage)}
           >
-            {"Zoom"}
+            {"Bounding Box"}
           </Button>
           <Button
             variant="contained"

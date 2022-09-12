@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { CircularProgress, Box, Button } from "@mui/material";
-import { FadeIn, CanvasZoom, Spacer } from "../components";
+import { FadeIn, Canvas, Spacer } from "../components";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import { inputData } from "src/utils";
 
-export const ZoomFocus = () => {
+export const BBoxFocus = () => {
   const [renderImg, setRenderImg] = useState(false);
 
   const [nextButton, setNextButton] = useState(false);
@@ -52,13 +52,14 @@ export const ZoomFocus = () => {
     <FadeIn duration={500}>
       <Box
         display="flex"
-        marginTop="50px"
+        marginTop="30px"
         marginLeft="300px"
         marginRight="300px"
         flexDirection="column"
         alignItems="center"
       >
-        <CanvasZoom regionBox={region.bbox} />
+        <Canvas regionBox={region.bbox} />
+        <Spacer height={2} />
         <Box display="flex" flexDirection="column">
           <Box display="flex" flexDirection="row">
             <Button

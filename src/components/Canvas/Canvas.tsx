@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { canvasWidth, canvasHeight } from "../../constants";
 import { INPUT_IMAGE_URL } from "../../utils";
 
 interface Props {
@@ -8,8 +9,7 @@ interface Props {
 
 export const Canvas = ({ regionBox, method }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const x = regionBox[0];
-  const y = regionBox[1];
+
   const regionWidth = regionBox[2];
   const regionHeight = regionBox[3];
 
@@ -18,35 +18,62 @@ export const Canvas = ({ regionBox, method }: Props) => {
 
     const render = () => {
       const image = new Image();
-      image.src = INPUT_IMAGE_URL;
+
+      setTimeout(() => {
+        image.src = INPUT_IMAGE_URL;
+      }, 100);
 
       image.onload = () => {
-        context?.clearRect(0, 0, 1980 / 2, 1080 / 2);
+        const x = regionBox[0] * (canvasWidth / image.width);
+        const y = regionBox[1] * (canvasHeight / image.height);
+
+        const sWidth = regionWidth * (canvasWidth / image.width);
+        const sHeight = regionHeight * (canvasHeight / image.height);
+
+        context?.clearRect(0, 0, canvasWidth, canvasHeight);
 
         context!.filter = "none";
-        context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
+        context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
 
         context!.globalCompositeOperation = "destination-atop";
-        context?.drawImage(
-          image,
-          x / 2,
-          y / 2,
-          regionWidth / 2,
-          regionHeight / 2
-        );
 
         if (method === "blur") {
           context!.filter = "blur(4px)";
-          context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
+
+          if (sWidth <= 125 && sHeight <= 125) {
+            context?.translate(x, y);
+            context?.scale(1.12, 1.12);
+            context?.translate(-x, -y);
+            context?.drawImage(image, x, y, sWidth + 3, sHeight + 2);
+            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+          } else {
+            context?.drawImage(image, x, y, sWidth, sHeight);
+            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+          }
+
+          context?.setTransform(1, 0, 0, 1, 0, 0);
         } else {
-          context!.filter = "saturate(20%)";
-          context?.drawImage(image, 0, 0, 1900 / 2, 1080 / 2);
+          context!.filter = "saturate(5%)";
+
+          if (sWidth <= 125 && sHeight <= 125) {
+            context?.translate(x, y);
+            context?.scale(1.2, 1.2);
+            context?.translate(-x, -y);
+            context?.drawImage(image, x, y, sWidth + 3, sHeight + 2);
+            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+          } else {
+            context?.drawImage(image, x, y, sWidth, sHeight);
+            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+          }
+
+          context?.setTransform(1, 0, 0, 1, 0, 0);
         }
       };
     };
     render();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasRef, x, y, regionHeight, regionWidth]);
 
-  return <canvas ref={canvasRef} width={1900 / 2} height={1080 / 2} />;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canvasRef, regionHeight, regionWidth]);
+
+  return <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />;
 };

@@ -52,7 +52,7 @@ export const SaturateFocus = () => {
     <FadeIn duration={500}>
       <Box
         display="flex"
-        marginTop="50px"
+        marginTop="30px"
         marginLeft="300px"
         marginRight="300px"
         flexDirection="column"

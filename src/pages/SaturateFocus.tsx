@@ -58,7 +58,7 @@ export const SaturateFocus = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <Canvas regionBox={region.bbox} />
+        <Canvas regionBox={region.bbox} method="saturate" />
         <Spacer height={1} />
         <Box display="flex" flexDirection="column">
           <Box display="flex" flexDirection="row">

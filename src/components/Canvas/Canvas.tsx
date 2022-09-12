@@ -27,46 +27,89 @@ export const Canvas = ({ regionBox, method }: Props) => {
         const x = regionBox[0] * (canvasWidth / image.width);
         const y = regionBox[1] * (canvasHeight / image.height);
 
-        const sWidth = regionWidth * (canvasWidth / image.width);
-        const sHeight = regionHeight * (canvasHeight / image.height);
+        const sWidth =
+          regionWidth * (canvasWidth / image.width) < canvasWidth
+            ? regionWidth * (canvasWidth / image.width)
+            : canvasWidth;
+        const sHeight =
+          regionHeight * (canvasHeight / image.height) < canvasHeight
+            ? regionHeight * (canvasHeight / image.height)
+            : canvasHeight;
 
         context?.clearRect(0, 0, canvasWidth, canvasHeight);
 
         context!.filter = "none";
         context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
 
-        context!.globalCompositeOperation = "destination-atop";
-
         if (method === "blur") {
+          context!.globalCompositeOperation = "destination-atop";
           context!.filter = "blur(4px)";
 
           if (sWidth <= 125 && sHeight <= 125) {
             context?.translate(x, y);
-            context?.scale(1.2, 1.2);
+            context?.scale(1.05, 1);
             context?.translate(-x, -y);
-            context?.drawImage(image, x, y, sWidth + 3, sHeight + 2);
+
+            context?.drawImage(
+              image,
+              x,
+              y,
+              sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
+              sHeight + y > canvasHeight ? canvasHeight - y : sHeight
+            );
             context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           } else {
-            context?.drawImage(image, x, y, sWidth, sHeight);
+            context?.drawImage(
+              image,
+              x,
+              y,
+              sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
+              sHeight + y > canvasHeight ? canvasHeight - y : sHeight
+            );
             context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           }
 
           context?.setTransform(1, 0, 0, 1, 0, 0);
-        } else {
+        } else if (method === "saturate") {
+          context!.globalCompositeOperation = "destination-atop";
           context!.filter = "saturate(5%)";
 
           if (sWidth <= 125 && sHeight <= 125) {
             context?.translate(x, y);
-            context?.scale(1.2, 1.2);
+            context?.scale(1.05, 1);
             context?.translate(-x, -y);
-            context?.drawImage(image, x, y, sWidth + 3, sHeight + 2);
+
+            context?.drawImage(
+              image,
+              x,
+              y,
+              sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
+              sHeight + y > canvasHeight ? canvasHeight - y : sHeight
+            );
             context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           } else {
-            context?.drawImage(image, x, y, sWidth, sHeight);
+            context?.drawImage(
+              image,
+              x,
+              y,
+              sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
+              sHeight + y > canvasHeight ? canvasHeight - y : sHeight
+            );
             context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           }
-
           context?.setTransform(1, 0, 0, 1, 0, 0);
+        } else {
+          context?.beginPath();
+          context?.rect(
+            x,
+            y,
+            sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
+            sHeight + y > canvasHeight ? canvasHeight - y : sHeight
+          );
+
+          context!.lineWidth = 3;
+          context!.strokeStyle = "red";
+          context?.stroke();
         }
       };
     };

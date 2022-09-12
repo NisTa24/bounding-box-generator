@@ -1,6 +1,6 @@
 export const routes = {
     homePage: '/',
-    zoomPage: '/zoom',
+    bboxPage: '/bbox',
     blurPage: '/blur',
     saturatePage: '/saturate'
 }

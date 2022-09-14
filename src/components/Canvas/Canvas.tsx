@@ -19,9 +19,15 @@ export const Canvas = ({ regionBox, method }: Props) => {
     const render = () => {
       const image = new Image();
 
-      setTimeout(() => {
-        image.src = INPUT_IMAGE_URL;
-      }, 100);
+      const loadImg = async () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            image.src = INPUT_IMAGE_URL;
+          }, 100);
+        });
+      };
+
+      void loadImg();
 
       image.onload = () => {
         const x = regionBox[0] * (canvasWidth / image.width);
@@ -57,7 +63,6 @@ export const Canvas = ({ regionBox, method }: Props) => {
               sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
               sHeight + y > canvasHeight ? canvasHeight - y : sHeight
             );
-            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           } else {
             context?.drawImage(
               image,
@@ -66,8 +71,8 @@ export const Canvas = ({ regionBox, method }: Props) => {
               sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
               sHeight + y > canvasHeight ? canvasHeight - y : sHeight
             );
-            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           }
+          context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
 
           context?.setTransform(1, 0, 0, 1, 0, 0);
         } else if (method === "saturate") {
@@ -86,7 +91,6 @@ export const Canvas = ({ regionBox, method }: Props) => {
               sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
               sHeight + y > canvasHeight ? canvasHeight - y : sHeight
             );
-            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           } else {
             context?.drawImage(
               image,
@@ -95,8 +99,8 @@ export const Canvas = ({ regionBox, method }: Props) => {
               sWidth + x > canvasWidth ? canvasWidth - x : sWidth,
               sHeight + y > canvasHeight ? canvasHeight - y : sHeight
             );
-            context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           }
+          context?.drawImage(image, 0, 0, canvasWidth, canvasHeight);
           context?.setTransform(1, 0, 0, 1, 0, 0);
         } else {
           context?.beginPath();
